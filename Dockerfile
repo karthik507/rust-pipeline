@@ -4,8 +4,9 @@ FROM rust:latest
 # Set the working directory inside the container
 WORKDIR /usr/src/app
 
-# Copy the Rust code file into the container
-COPY ./src/main.rs ./src/main.rs
+# Copy the Rust code file and Cargo.toml into the container
+COPY ./src ./src
+COPY Cargo.toml .
 
 # Build the Rust application
 RUN cargo build --release
