@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rust-deployment
+  labels:
+    app: my-client-v2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-client
+      version: v2
+  template:
+    metadata:
+      labels:
+        app: my-client
+        version: v2
+    spec:
+      containers:
+        - name: my-client-v2
+          image: tcl1/pipeline-go:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          env:
+            - name: REACT_APP_BASE_URL
+              value: "$(route)"
